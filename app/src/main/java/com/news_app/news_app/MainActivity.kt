@@ -3,8 +3,13 @@ package com.news_app.news_app
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,14 +18,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-    private var currentFragment = true
+    var sources: List<Source> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, FragmentA())
-            .commit()
+        val listItems = ArrayList<Source>()
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val adapter = MyAdapter(listItems)
+        recyclerView.adapter = adapter
+        Log.d("test", listItems.toString())
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://newsapi.org")
@@ -42,26 +54,42 @@ class MainActivity : AppCompatActivity() {
                     }
                     response.body()?.let {
                         Log.d(ContentValues.TAG, it.toString())
-
-                        it.sources.forEach { source ->
-                            Log.d(ContentValues.TAG, source.name)
-                        }
+                        listItems += it.sources.slice(0..20)
+//                        adapter.updateData(it.sources.slice(0..20))
+                        val adapter = MyAdapter(listItems)
+                        recyclerView.adapter = adapter
                     }
                 }
             })
 
-        findViewById<Button>(R.id.menuBtn1).setOnClickListener {
-            var fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, FragmentA())
-            fragmentTransaction.commit()
+    }
+
+    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        var textCatecory: TextView = itemView.findViewById<TextView>(R.id.category)
+        var textCountry: TextView = itemView.findViewById<TextView>(R.id.country)
+        var textDescription: TextView = itemView.findViewById<TextView>(R.id.description)
+    }
+
+    class MyAdapter(var list: List<Source>) : RecyclerView.Adapter<MyViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup,
+                                        viewType: Int): MyViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val view = inflater.inflate(R.layout.item, parent, false)
+            return MyViewHolder(view)
         }
 
-        findViewById<Button>(R.id.menuBtn2).setOnClickListener {
-            var fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, FragmentB())
-            fragmentTransaction.commit()
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            val source = list[position]
+            holder.textCountry.text = source.country.toString().uppercase()
+            holder.textCatecory.text = source.category.uppercase()
+            holder.textDescription.text = source.description
+            Log.d(ContentValues.TAG, source.country)
+//            val name = list[position]
+//            holder.textView.text = name
         }
 
-
+        override fun getItemCount(): Int {
+            return list.size
+        }
     }
 }

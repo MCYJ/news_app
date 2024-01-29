@@ -19,8 +19,18 @@ class FragmentA : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_a, container, false)
-        val textArea = rootView.findViewById<TextView>(R.id.fragment_a_textview)
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_a, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        val textArea = view.findViewById<TextView>(R.id.fragment_a_textview)
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
@@ -46,7 +56,5 @@ class FragmentA : Fragment() {
                     }
                 }
             })
-        // Inflate the layout for this fragment
-        return rootView
     }
 }
