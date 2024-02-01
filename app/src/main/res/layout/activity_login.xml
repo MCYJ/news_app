@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_marginTop="100sp"
+        android:layout_marginBottom="80sp"
+        android:layout_width="wrap_content"
+        android:layout_height="150sp"
+        android:text="@string/app_title"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:textColor="#6305dc"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="50sp"
+        android:hint="아이디를 입력하세요"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="50sp"
+        android:hint="비밀번호를 입력하세요"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자동로그인"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center"
+        android:text="LOGIN" />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="SIGN UP" />
+</LinearLayout>
