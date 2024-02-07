@@ -1,11 +1,14 @@
 package com.news_app.news_app
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = MyAdapter(listItems)
         recyclerView.adapter = adapter
 
+        val takePictureBtn = findViewById<Button>(R.id.takePictureBtn)
+        takePictureBtn.setOnClickListener {
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(cameraIntent, 123)
+        }
 
         // retrofit HTTP request
         val retrofit = Retrofit.Builder()

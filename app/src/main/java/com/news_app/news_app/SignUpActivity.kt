@@ -1,0 +1,13 @@
+package com.news_app.news_app
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class SignUpActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_sign_up)
+
+//        val signUpBtn: Button = findViewById(R.id.signUpBtn)
+    }
+}
