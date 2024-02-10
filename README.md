@@ -8,6 +8,11 @@
   - Retrofit을 활용한 Restful API 요청 전송 및 응답처리
 3. 뉴스 관련 커뮤니티 이용
 
+### 사용화면
+1. 초기화면
+![Screen_Recording_20240211-002603_news_app_001_2](https://github.com/MCYJ/news_app/assets/29505324/2cd5961a-ba6c-461e-a22a-a8a24e273fcb)
+
+
 ### 활용라이브러리
 1. Retrofit2
 2. CameraX
