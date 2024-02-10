@@ -9,7 +9,7 @@
 3. 뉴스 관련 커뮤니티 이용
 
 ### 사용화면
-1. 초기화면
+1. 초기화면<br>
 ![Screen_Recording_20240211-002603_news_app_001_2](https://github.com/MCYJ/news_app/assets/29505324/2cd5961a-ba6c-461e-a22a-a8a24e273fcb)
 
 
